@@ -27,7 +27,7 @@ def im_list_to_blob(ims,type=np.float32,domain=[]):
         ndims = max_shape[2]
                 
     blob = np.zeros((num_images, max_shape[0], max_shape[1], ndims),dtype=type)
-    for i in xrange(num_images):
+    for i in range(num_images):
         im = ims[i]
         if (ndims==1):
             blob[i, 0:im.shape[0], 0:im.shape[1], 0] = im
@@ -56,17 +56,17 @@ def prep_im_for_blob(im, pixel_means,target_size, max_size,max_area,fix_scale):
         # but cv2 requires height/width -> permute [0,1]
 
     if DEBUG:
-        print "fix_scale: ",fix_scale
-        print "max_size:  ",max_size, " step: ",cfg['SIZE_STEP']
-        print "dsize prelim:     ",dsize_prelim
-        print "dsize final :     ",dsize_
-        print "imscale prelim:   ",im_scale_prelim
-        print "imscale step 2:   ",im_scale_
-        print "imscale composite:",[im_scale[0],im_scale[1]]
-        print "imshape prev:     ",im_shape_prev
+        print("fix_scale: ",fix_scale)
+        print("max_size:  ",max_size, " step: ",cfg['SIZE_STEP'])
+        print("dsize prelim:     ",dsize_prelim)
+        print("dsize final :     ",dsize_)
+        print("imscale prelim:   ",im_scale_prelim)
+        print("imscale step 2:   ",im_scale_)
+        print("imscale composite:",[im_scale[0],im_scale[1]])
+        print("imshape prev:     ",im_shape_prev)
         
-        print "ratio: ",im.shape[0]/dsize_[0]," , ",im.shape[1]/dsize_[1]
-        print "imshp-after: ",im.shape
+        print("ratio: ",im.shape[0]/dsize_[0]," , ",im.shape[1]/dsize_[1])
+        print("imshp-after: ",im.shape)
 
     return im, im_scale
 
@@ -92,7 +92,7 @@ def _conform_to_max(im_shape,target_size,max_size,max_area,im_scale_in = -1):
     fixed_area = False
     if np.ceil(im_scale_scalar * im_size_max) > max_size:
          if DEBUG:
-            print "fixing max size"
+            print("fixing max size")
          im_scale_scalar = float(max_size) / float(im_size_max)
 
     cnst        = cfg['SIZE_STEP']
@@ -102,16 +102,16 @@ def _conform_to_max(im_shape,target_size,max_size,max_area,im_scale_in = -1):
     anticipated_y = cnst*(math.ceil((im_size_y*im_scale_scalar -1.0)/cnst)) + 1;
     
     if DEBUG:
-        print "anticipated_x: ",anticipated_x,"anticipated_y: ",anticipated_y,"anticipated_area: ",anticipated_x*anticipated_y
+        print("anticipated_x: ",anticipated_x,"anticipated_y: ",anticipated_y,"anticipated_area: ",anticipated_x*anticipated_y)
     if (anticipated_y*anticipated_x) > max_area:
          if DEBUG:
-            print "fixing area"
+            print("fixing area")
          fixed_area = True
          #print max_area,im_scale_scalar*im_scale_scalar * im_shape[0]* im_shape[1]
          im_scale_scalar = min(im_scale_scalar,math.sqrt(float(max_area) / float(im_shape[0]* im_shape[1])))
     
     if DEBUG:
-        print "im scale scalar: ",im_scale_scalar, " max_size: ",float(max_size), " area: ",float(im_shape[0]* im_shape[1])," max_area: ",max_area," im_shape: ", im_shape[0], im_shape[1]
+        print("im scale scalar: ",im_scale_scalar, " max_size: ",float(max_size), " area: ",float(im_shape[0]* im_shape[1])," max_area: ",max_area," im_shape: ", im_shape[0], im_shape[1])
                  
     if fixed_area:
         im_size_x_  = cnst*(math.floor((im_size_x*im_scale_scalar -1.0)/cnst)) + 1;
@@ -127,7 +127,7 @@ def _predict_transform(sg_shape,hole):
     newx  = sg_shape[0]
     newy  = sg_shape[1]
     if DEBUG:
-        print "newx,newy: ",newx,newy
+        print("newx,newy: ",newx,newy)
     if (hole>1):
         newy    = (((newy-1)/4) +1)/2 + 1
         newx    = (((newx-1)/4) +1)/2 + 1
@@ -135,7 +135,7 @@ def _predict_transform(sg_shape,hole):
         newy    = (((newy-1)/8) +1)/2 + 1
         newx    = (((newx-1)/8) +1)/2 + 1
     if DEBUG:
-        print "newx, newy after: ",newx,newy
+        print("newx, newy after: ",newx,newy)
     sgsize_ = (int(newx), int(newy))
     return sgsize_
 

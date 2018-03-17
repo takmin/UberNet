@@ -228,9 +228,9 @@ def _merge_a_into_b(a, b):
     if type(a) is not edict:
         return
 
-    for k, v in a.iteritems():
+    for k, v in a.items():
         # a must specify keys that are in b
-        if not b.has_key(k):
+        if k not in b:
             raise KeyError('{} is not a valid config key'.format(k))
 
         # the types must match, too
@@ -337,7 +337,7 @@ def get_model_dir(imdb, net):
     #path = osp.abspath(osp.join(__C.ROOT_DIR, 'experiments', __C['EXP_DIR'], imdb.name))
     path = osp.abspath(osp.join(__C.ROOT_DIR, 'experiments', __C['EXP_DIR'], 'model'))
 
-    print "path is :",path
+    print("path is :",path)
     if net is None:
         return path
     else:

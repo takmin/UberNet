@@ -4,8 +4,8 @@ def setup_nmx_layers(net):
     # sets layers used for non-maximum suppression in boundaries (nothing is trained - replicating nmx from edgeboxes)
 
     to_fix = ['sm1_', 'sm3_', 'cn1_', 'cn3_']
-    for it in range(0, len(net.params.items())):
-        name_layer = net.params.items()[it][0]
+    for item in net.params.items():
+        name_layer = item[0]
         prefix     = name_layer[0:4]
         for fx in range(0,len(to_fix)):
             if prefix==to_fix[fx]:
@@ -56,7 +56,7 @@ def setup_nmx_layers(net):
     """
 
 def setup_fusion_layers(net):
-    print "Setting up fusion layers"
+    print("Setting up fusion layers")
     for it in range(0,len(net.params.items())):
         name_layer = net.params.items()[it][0]
         has_upscore = name_layer.find('upscore-fuse-')>=0
@@ -68,7 +68,7 @@ def setup_fusion_layers(net):
             shape       = net.params[name_layer][0].data.shape;
             no_empty    = len(shape)>0
             if (no_deri and no_split and no_seg and no_empty):
-                print "This layer gets updated: ",name_layer
+                print("This layer gets updated: ",name_layer)
                 n_ch    = shape[0];
                 n_in    = shape[1]/n_ch;
                 vals    = np.zeros(shape);
@@ -88,7 +88,7 @@ import caffe
 
 def init_network(net_target,pretrained_model,do_shortcut):
 
-    print "initializing network"
+    print("initializing network")
     is_vgg = "VGG"  in pretrained_model;
     is_rnet = (not is_vgg);
 
@@ -192,7 +192,7 @@ def init_network(net_target,pretrained_model,do_shortcut):
     #
     for cand_composite in net_target.params:
         if (cand_composite in instantiated) == False:
-            print 'could not instantiate: {}'.format(cand_composite)
+            print('could not instantiate: {}'.format(cand_composite))
 
     #blahblahblah
     net_target = setup_nmx_layers(net_target);

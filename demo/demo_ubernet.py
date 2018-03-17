@@ -22,7 +22,7 @@ from utils.viz import visualize_detection,visualize_soft,replicate,normalize13,v
 import scipy.io as sio
 
 #local settings -  update your paths accordingly
-UBERNET_ROOT  = '/home/iason/ubernet'
+UBERNET_ROOT  = '/home/WORK/Build/UberNet'
 MODEL_PATH    = UBERNET_ROOT + '/model/'
 CFG_PATH      = MODEL_PATH + 'cfg.yml'
 PROTOTXT_PATH = MODEL_PATH + 'test.prototxt'
@@ -31,7 +31,7 @@ DEMO_PATH     = UBERNET_ROOT + '/demo/'
 IM_NAME       = DEMO_PATH  + 'horse.jpg'
 DO_SHOW       = False                 #Generate images or else store to folder
 SV_DIR        = DEMO_PATH   + '/res/' #if do_show=False, this is where images are saved
-DEV_ID        = 1                     #GPU Device ID
+DEV_ID        = 0                     #GPU Device ID
 
 # task-specific functions used to visualize the different network layers
 output_info = namedtuple('Output', ['name', 'post_fun'])

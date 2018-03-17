@@ -20,7 +20,7 @@ import numpy as np
 import cv2
 import caffe
 from fast_rcnn.nms_wrapper import nms
-import cPickle
+import _pickle as cPickle
 from utils.blob import im_list_to_blob,_conform_to_max,prep_im_for_blob
 import os
 import scipy.io as sio
@@ -288,7 +288,7 @@ def test_net(net, imdb,cfg,max_per_image=100, thresh=0.05, vis=False,task = 'det
         do_prt   = task=='prt'
         do_sal   = task=='sal'
 
-        print "num_images = ",num_images
+        print("num_images = ",num_images)
 
         for i in xrange(num_images):
             next_file = os.path.join(output_dir,imdb.image_index[i] + '.mat')
@@ -334,9 +334,9 @@ def test_net(net, imdb,cfg,max_per_image=100, thresh=0.05, vis=False,task = 'det
                             all_boxes[j][i] = all_boxes[j][i][keep, :]
                 _t['misc'].toc()
 
-                print 'im_detect: {:d}/{:d} {:.3f}s {:.3f}s' \
+                print('im_detect: {:d}/{:d} {:.3f}s {:.3f}s' \
                       .format(i + 1, num_images, _t['im_detect'].average_time,
-                              _t['misc'].average_time)
+                              _t['misc'].average_time))
 
             #print "here!!"
             if do_edg:
@@ -385,5 +385,5 @@ def test_net(net, imdb,cfg,max_per_image=100, thresh=0.05, vis=False,task = 'det
                 cPickle.dump(all_boxes, f, cPickle.HIGHEST_PROTOCOL)
 
     if do_det:
-        print 'Evaluating detections'
+        print('Evaluating detections')
         imdb.evaluate_detections(all_boxes, output_dir)

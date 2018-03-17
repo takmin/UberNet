@@ -60,14 +60,14 @@ def visualize_gray(activations,slice=1):
 def visualize_detection(im,boxes,scores,thresh,cfg):
     im = im[:, :, (2, 1, 0)]
     plt.imshow(im)
-    for j in xrange(1, scores.shape[1]):
+    for j in range(1, scores.shape[1]):
         inds = np.where(scores[:, j] > thresh)[0]
         cls_scores = scores[inds, j]
         cls_boxes = boxes[inds, j*4:(j+1)*4]
         cls_dets = np.hstack((cls_boxes, cls_scores[:, np.newaxis])).astype(np.float32, copy=False)
         keep = nms(cls_dets, cfg.TEST.NMS)
         dets = cls_dets[keep, :]
-        for i in xrange(np.minimum(10, dets.shape[0])):
+        for i in range(np.minimum(10, dets.shape[0])):
             bbox = dets[i, :4]
             score = dets[i, -1]
             if score > thresh:
@@ -98,7 +98,7 @@ def replicate(activations):
 def normalize13(activations):
     shape = activations.shape;
     total  = np.zeros((shape[1],shape[2],3))
-    for d in xrange(0,2):
+    for d in range(0,2):
         din = activations[d];
         mx = din.max(axis=1); mx = mx.max(axis=0);
         mn = din.min(axis=1); mn = mn.min(axis=0);
@@ -109,7 +109,7 @@ def normalize13(activations):
 def normalize46(activations):
     shape = activations.shape;
     total  = np.zeros((shape[1],shape[2],3))
-    for d in xrange(3,5):
+    for d in range(3,5):
         din = activations[d];
         mx = din.max(axis=1); mx = mx.max(axis=0);
         mn = din.min(axis=1); mn = mn.min(axis=0);

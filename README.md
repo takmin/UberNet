@@ -1,3 +1,11 @@
+### About this folk
+
+This repository is forked from 
+https://github.com/jkokkin/UberNet
+
+This code is modified from original code to run in Python3.
+
+
 ### Intro
 
 First release of  UberNet in "test" mode.
